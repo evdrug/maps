@@ -2,7 +2,7 @@ import "./style.css"
 ymaps.ready(init);
 var myMap;
 
-function init(){
+function init() {
     myMap = new ymaps.Map("map", {
         center: [59.93, 30.33],
         zoom: 10
@@ -60,83 +60,47 @@ function init(){
     objectManager.clusters.options.set('clusterIconLayout', 'default#pieChart');
     objectManager.add(json);
     myMap.geoObjects.add(objectManager);
-    myMap.events.add('click', function (e) {
-            var coords = e.get('coords');
-            myMap.balloon.open(coords,{ contentHeader: 'Однажды',
-                contentBody: 'В студёную зимнюю пору' +
-                ' <span style="color:red; font-weight:bold">Я</span>' +
-                ' из лесу <b>вышел</b>',
-            }, {
-                minWidth:300,
-                minHeight: 300,
-                offset: [60,330]
-            })
-        });
+    var html= '<div class="block">\n' +
+        '    <div class="block__header">\n' +
+        '        текст\n' +
+        '    </div>\n' +
+        '    <div class="block__content">\n' +
+        '        <ul>\n' +
+        '            <li>1</li>\n' +
+        '            <li>4</li>\n' +
+        '            <li>4</li>\n' +
+        '            <li>5</li>\n' +
+        '            <li>ss</li>\n' +
+        '        </ul>\n' +
+        '    </div>\n' +
+        '    <div class="block__form">\n' +
+        '        <input type="text" class="form__input">\n' +
+        '    </div>'
 
-    // var myPlacemarkWithContent = new ymaps.Placemark([59.93, 30.33], {
-    //     hintContent: 'Собственный значок метки с контентом',
-    //     clusterCaption: '1',
-    //     balloonContent: 'А эта — новогодняя',
-    //     iconContent: '12'
-    // });
-    //
-    // var myPlacemarkWithContent2 = new ymaps.Placemark([59.934, 30.334], {
-    //     hintContent: 'Собственный значок метки с контентом',
-    //     clusterCaption: '1',
-    //     balloonContent: 'А эта — новогодняя2',
-    //     iconContent: '12-2'
-    // },{
-    //     draggable: true,
-    //     preset: 'islands#darkGreenStretchyIcon'
-    // });
-    //
-    // myPlacemarkWithContent2.events.add('dragend', function(e) {
-    //     // Получение ссылки на объект, который был передвинут.
-    //     var thisPlacemark = e.get('target');
-    //     // Определение координат метки
-    //     var coords = thisPlacemark.geometry.getCoordinates();
-    //     console.log(coords);
-    //     // и вывод их при щелчке на метке
-    //     thisPlacemark.properties.set('balloonContent', coords);
-    // });
-    //
-    //
-    // var clusterer = new ymaps.Clusterer({
-    //     clusterIconLayout: 'default#pieChart',
-    //     clusterDisableClickZoom: true
-    // });
-    //
-    // clusterer.add(myPlacemarkWithContent)
-    //     .add(myPlacemarkWithContent2);
-    //
-    // var objects = ymaps.geoQuery([{
-    //     type: 'Point',
-    //     coordinates: [59.94, 30.38]
-    // }, {
-    //     type: 'Point',
-    //     coordinates: [59.945, 30.385]
-    // }, {
-    //     type: 'Point',
-    //     coordinates: [59.947, 30.327]
-    // }, {
-    //     type: 'Point',
-    //     coordinates: [59.95, 30.33]
-    // }]);
-    //
-    // objects.searchInside(myMap)
-    // // И затем добавим найденные объекты на карту.
-    //     .addToMap(myMap);
-    //
-    // myMap.events.add('boundschange', function () {
-    //     // После каждого сдвига карты будем смотреть, какие объекты попадают в видимую область.
-    //     var visibleObjects = objects.searchInside(myMap).addToMap(myMap);
-    //     // Оставшиеся объекты будем удалять с карты.
-    //     objects.remove(visibleObjects).removeFromMap(myMap);
-    // });
-    //
-    // myMap.geoObjects.add(clusterer);
-    // myMap.events.add('click',function (e) {
-    //     console.log(e.get('target'));
-    //     console.log(e.get('coords'));
-    // })
+    var MyBalloonLayout = ymaps.templateLayoutFactory.createClass(
+        `<div class="block">
+    <div class="block__header">
+        текст
+    </div>
+    <div class="block__content">
+        <ul>
+            <li>1</li>
+            <li>4</li>
+            <li>4</li>
+            <li>5</li>
+            <li>ss</li>
+        </ul>
+    </div>
+    <div class="block__form">
+        <input type="text" class="form__input">
+    </div>`
+    );
+
+    myPlacemark = window.myPlacemark = new ymaps.Placemark([59.95, 30.33], {
+        balloonHeader: 'Заголовок балуна',
+        balloonContent: 'Контент балуна'
+    }, {
+        balloonContentLayout: MyBalloonLayout, balloonPanelMaxMapArea: 0
+    });
+
 }
