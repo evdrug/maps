@@ -39,8 +39,6 @@ function init() {
                     "coordinates": [59.934, 30.334]
                 },
                 "properties": {
-                    "balloonContentHeader": "Аптека",
-                    "balloonContent": "Аптека",
                     "data": {
                         "organization": "pharmacy",
                         "open": "8am - 10pm"
@@ -54,9 +52,16 @@ function init() {
         clusterize: true,
         // ObjectManager принимает те же опции, что и кластеризатор.
         gridSize: 32,
-        clusterDisableClickZoom: true
+        clusterDisableClickZoom: true,
+
+
     });
-    // objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+    objectManager.objects.options.set({
+        // В customBallon надо отрисовать все
+        balloonContentLayout: CustomLayoutClass,
+        balloonMinHeight: 530   // чтобы как в макете.
+                                // не повлияет на высоту балуна кластера типа карусель
+    })
     objectManager.clusters.options.set('clusterIconLayout', 'default#pieChart');
     objectManager.add(json);
     myMap.geoObjects.add(objectManager);
@@ -115,19 +120,16 @@ function init() {
             build: function () {
                 CustomLayoutClass.superclass.build.call(this);
                 this._$element = this._element.querySelector('.balloon_layout');
-                this.applyElementOffset.call(this);
                 this._$element.querySelector('.close-b').addEventListener('click', this.onCloseClick.bind(this))
             },
             getShape: function () {
                 CustomLayoutClass.superclass.getShape.call(this);
 
-                var top = this._$element.getBoundingClientRect().top ;
-                var left = this._$element.getBoundingClientRect().left ;
-                console.log(top,left,this._$element.offsetWidth,this._$element.offsetHeight)
+                var el = this._$element.getBoundingClientRect();
                 return new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([
-                    [left, top-20], [
-                         left + this._$element.offsetWidth ,
-                        top + this._$element.offsetHeight
+                    [0, 0], [
+                        el.width,
+                        el.height
                     ]
                 ]));
             },
@@ -153,7 +155,12 @@ function init() {
         ymaps.geocode(coords).then(function(res) {
             var thisAdress = res.geoObjects.get(0).properties.get('name');
             console.log(thisAdress);
-    });})
+    });
+        myMap.balloon.open(coords,{
+            balloonLayout:CustomLayoutClass
+        })
+
+    })
 
 
 }
