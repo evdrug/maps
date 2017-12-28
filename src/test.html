@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500&amp;subset=cyrillic" rel="stylesheet"></head>-->
 <body>
 <div class="balloon_layout">
     <div class="block">
         <div class="block__header">
-            Невский пр., 78, Санкт-Петербург, 191025
+            <div class="header-content">
+                <i class="fa fa-lg fa-map-marker head-marker" aria-hidden="true"></i>
+                Невский пр., 78, Санкт-Петербург, 191025
+            </div>
+            <div class="header-content close"><i class="fa fa-lg fa-times" aria-hidden="true"></i></div>
         </div>
         <div class="block__content">
             <div class="block__comment">
-                <ul>
+                <ul class="list">
                     <li>1</li>
                     <li>4</li>
                     <li>4</li>
@@ -26,11 +31,30 @@
                     <li>ss</li>
                 </ul>
             </div>
+            <div class="block__form">
+                <form action="" class="form">
+                    <div class="form__label">Задача</div>
+                    <div class="form__list">
+                        <select name="" id="" class="form__select">
+                            <option hidden selected disabled>Тип задачи</option>
+                            <option value="1" class="item-select">Трабл</option>
+                            <option value="2" class="item-select">Заявка</option>
+                        </select>
+                    </div>
+                    <div class="form__list">
+                        <input type="text" class=" form__input" placeholder="Клиент">
+                    </div>
+                    <div class="form__list">
+                        <textarea class="form__area" name="text" placeholder="Описание задачи"></textarea>
+                    </div>
+                    <div class="form__button">
+                        <button class="button remove">Удалить</button>
+                        <button class="button add">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-        </div>
-        <div class="block__form">
-            <input type="text" class="form__input">
-        </div>
     </div>
 </div>
 

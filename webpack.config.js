@@ -48,6 +48,7 @@ module.exports ={
             template: './src/index.hbs'
         }),
         new CleanWebpackPlugin(['dist']),
+
     ]
 
 }

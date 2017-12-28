@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500&subset=cyrillic');
 html,body{
     width: 100%;
     height: 100%;
@@ -6,6 +7,9 @@ html,body{
     width: 100%;
     height: 100%;
 }
+div {
+    box-sizing: border-box;
+}
 
 .balloon_layout{
     width: 380px;
@@ -13,7 +17,8 @@ html,body{
     -moz-border-radius: 5px;
     border-radius: 5px;
     overflow: hidden;
-    border: 1px solid #f7f7f7;
+    border: 1px solid #c9c9c9;
+    background-color: #fff;
 
 }
 
@@ -27,22 +32,112 @@ html,body{
     background-color: #ff8663;
     padding: 15px 20px;
     color: #fff;
-    font-family: "FiraSans-Light";
+    font-family: "Fira Sans";
+    font-weight: 300;
     font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.head-marker {
+    margin-right: 3px;
+}
+.close-b {
+    cursor: pointer;
+
 }
 
 .block__content {
-    padding: 15px;
+    padding: 5px 15px;
 }
 
 .block__comment {
     width: 100%;
-    height: 155px;
-    overflow: auto;
+
+
     border-bottom: 1px solid #c9c9c9;
 }
+.list {
+    height: 155px;
+    padding-bottom: 5px;
+    overflow: auto;
+}
 
-.block__comment::-webkit-scrollbar-track {border-radius: 2px;}
-.block__comment::-webkit-scrollbar {width: 4px;}
-.block__comment::-webkit-scrollbar-thumb {border-radius: 2px;background: transparent;}
-.block__comment:hover::-webkit-scrollbar-thumb {background: #7f7f7f;}
+.list::-webkit-scrollbar-track {border-radius: 2px;}
+.list::-webkit-scrollbar {width: 4px;}
+.list::-webkit-scrollbar-thumb {border-radius: 2px;background: transparent;}
+.list:hover::-webkit-scrollbar-thumb {background: #7f7f7f;}
+
+.form__list {
+    width: 100%;
+    margin-bottom: 10px;
+
+}
+
+.form__label {
+    font-size: 16px;
+    color: rgb(255,134,99);
+    font-family: "Fira Sans";
+    font-weight: 500;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.form__select, .form__input, .form__area{
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid #c9c9c9;
+    padding: 8px 10px;
+    outline:none;
+}
+
+.form__select {
+    border-radius: 5px;
+    background-color: rgba(201,201,201,.3);
+}
+.form__area {
+    height: 85px;
+    resize: none;
+}
+
+.form__select:focus, .form__input:focus, .form__area:focus {
+    border: 1px solid #ff8663;
+}
+
+.form__button {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.button {
+    padding: 8px 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid;
+    color: #fff;
+    cursor: pointer;
+}
+
+.remove {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.remove:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
+
+.add {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.add:hover {
+    background-color: #449d44;
+    border-color: #398439;
+}
