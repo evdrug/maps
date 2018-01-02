@@ -1,6 +1,40 @@
-import "./style.css"
+import "./style.css";
+// require('./dataS')
+// import "./dataS"
+import LocalS  from './dataS';
 ymaps.ready(init);
 var myMap;
+let q = new LocalS();
+
+
+// let obj = {
+//     "type": "Feature",
+//     "id": 0,
+//     "geometry": {
+//         "type": "Point",
+//         "coordinates": [59.93, 30.33]
+//     },
+//     "properties": {
+//         "id":0,
+//         "balloonContentHeader": "Паб",
+//         "adress":"Фруктовая линия",
+//         "type":"Заявка",
+//         "comment":[
+//             {"date":"20.12.2017","text":"Надо все включить!)"}
+//         ],
+//         "data": {
+//             "organization": "shop",
+//             "open": "9am - 9pm"
+//         }
+//     },
+//     "options": {
+//         "preset": "islands#redStretchyIcon"
+//     }
+// };
+//
+// q.addData(obj);;
+//
+
 
 function init() {
     myMap = new ymaps.Map("map", {
@@ -26,6 +60,26 @@ function init() {
                         <li class="comment__item">
                             Задач нет
                         </li>
+                        </ul>
+                        </div>
+                        <div class="block__form">
+                            <form action="" class="form">
+                                <div class="form__label">Задача</div>
+                                <div class="form__list">
+                                    <select name="" id="" class="form__select">
+                                        <option hidden selected disabled>Тип задачи</option>
+                                        <option value="1" class="item-select">Трабл</option>
+                                        <option value="2" class="item-select">Заявка</option>
+                                    </select>
+                                </div>
+                                <div class="form__list">
+                                    <input type="text" class=" form__input" placeholder="Клиент">
+                                </div>
+                                <div class="form__list">
+                                    <textarea class="form__area" name="text" placeholder="Описание задачи"></textarea>
+                                </div>
+                                <div class="form__button">
+                                    <button class="button disabled" disabled>Удалить</button>
                     {% else %} 
                         {% for a in properties.comment %} 
                         <li>
@@ -46,31 +100,16 @@ function init() {
                             <div></div>   
                         </li>                     
                         {% endfor %}
-                    {% endif %}
-
-                </ul>
-            </div>
-            <div class="block__form">
-                <form action="" class="form">
-                    <div class="form__label">Задача</div>
-                    <div class="form__list">
-                        <select name="" id="" class="form__select">
-                            <option hidden selected disabled>Тип задачи</option>
-                            <option value="1" class="item-select">Трабл</option>
-                            <option value="2" class="item-select">Заявка</option>
-                        </select>
-                    </div>
-                    <div class="form__list">
-                        <input type="text" class=" form__input" placeholder="Клиент">
-                    </div>
-                    <div class="form__list">
-                        <textarea class="form__area" name="text" placeholder="Описание задачи"></textarea>
-                    </div>
-                    <div class="form__button">
-                    {% if properties.comment.length == 0 %}
-                        <button class="button disabled" disabled>Удалить</button>
-                    {% else %}
-                        <button class="button remove">Удалить</button>
+                        </ul>
+                        </div>
+                        <div class="block__form">
+                            <form action="" class="form">
+                                <div class="form__label">Добавить комментарий</div>
+                                <div class="form__list">
+                                    <textarea class="form__area" name="text" placeholder="Комментарий"></textarea>
+                                </div>
+                                <div class="form__button">
+                                    <button class="button remove">Удалить</button>
                     {% endif %}
                         <button class="button add">Добавить</button>
                     </div>
@@ -240,7 +279,7 @@ function init() {
 
 
 
-    objectManager.add(json);
+    objectManager.add(q.getStor());
     myMap.geoObjects.add(objectManager);
 
     objectManager.objects.events.add('click', function (e) {
@@ -251,15 +290,6 @@ function init() {
     objectManager.objects.options.set({
         balloonLayout: CustomLayoutClass,
     })
-
-
-    myPlacemark = window.myPlacemark = new ymaps.Placemark([59.95, 30.33], {
-        hash: { key1: "value1", key2: "value2", key3: "value3" }
-    }, {
-        balloonLayout: CustomLayoutClass
-    });
-    myMap.geoObjects.add(myPlacemark)
-
 
 
     myMap.events.add('click', function(e) {
