@@ -159,6 +159,28 @@ div {
 }
 
 .list-t {
-    overflow: auto;
-    height: 150px;
+    overflow-y: auto;
+    height: 130px;
+    margin-top: 5px;
+}
+
+.list{
+    padding: 0 5px;
+
+}
+.comment__item{
+    display: block;
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c9c9c9;
+    margin-bottom: 5px;
+}
+
+.comment__item:last-child {
+    border-bottom: none;
+}
+
+.comment__date {
+    color: #c9c9c9;
+    font-size: 12px;
 }
